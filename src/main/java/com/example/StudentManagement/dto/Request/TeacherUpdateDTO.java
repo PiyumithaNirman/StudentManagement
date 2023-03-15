@@ -18,10 +18,10 @@ public class TeacherUpdateDTO {
     private ArrayList phoneNumber;
     private boolean activeState;
 
-    public TeacherUpdateDTO(String firstName, String lastName, String email, ArrayList phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-    }
+//    public TeacherUpdateDTO(String firstName, String lastName, String email, ArrayList phoneNumber) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.phoneNumber = phoneNumber;
+//    }
 }

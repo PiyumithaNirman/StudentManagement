@@ -9,9 +9,8 @@ import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
-@Table(name = "enrollment")
+@Table(name = "payment")
 @Entity
 @TypeDefs({
         @TypeDef(name = "json", typeClass =  JsonType.class)
@@ -19,27 +18,16 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Enrollment {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "enrollment_id",length = 45,unique = true)
-    private int enrollmentID;
+    @Column(name = "payment_id",length = 45,unique = true)
+    private int paymentID;
 
-    @Column(name = "enrollment_date")
-    private Date date;
+    @Column(name = "amount",length = 100,nullable = false)
+    private int amount;
 
-    @Column(name = "active_state")
-    private boolean active_state;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
-
-
-
+    @Column(name = "paid_date",length = 100,nullable = false)
+    private Date paymentDate;
 }
