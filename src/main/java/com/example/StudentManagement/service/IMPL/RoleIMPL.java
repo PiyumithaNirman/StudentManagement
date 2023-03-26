@@ -21,7 +21,7 @@ public class RoleIMPL implements RoleService {
                 roleDTO.getDescription()
         );
 
-        if (!roleRepo.existsById(roleDTO.getRoleName())) {
+        if (!roleRepo.existsByRoleId(roleDTO.getRoleId())) {
 
             roleRepo.save(role);
             return "Successfully create new role";

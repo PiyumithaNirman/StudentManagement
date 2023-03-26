@@ -26,5 +26,4 @@ public class RoleController {
                 HttpStatus.OK
         );
     }
-
 }

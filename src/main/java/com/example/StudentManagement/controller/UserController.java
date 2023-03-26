@@ -1,10 +1,20 @@
 package com.example.StudentManagement.controller;
 
+import com.example.StudentManagement.dto.Paginated.PaginatedResponseDTO;
+import com.example.StudentManagement.dto.Request.UserUpdateDTO;
 import com.example.StudentManagement.dto.UserDTO;
 import com.example.StudentManagement.service.UserService;
+import com.example.StudentManagement.util.StandardResponse;
+import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,24 +25,74 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/registerUser")
-    public String saveLearner(@RequestBody UserDTO userDTO){
+    private final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-        return userService.saveLearner(userDTO);
+    @PostMapping("/registerUser")
+    public ResponseEntity<StandardResponse> saveLearner(@RequestBody @Valid UserDTO userDTO){
+
+        String saveLearner = userService.saveLearner(userDTO);
+        LOGGER.info(saveLearner+" LOGGER");
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",saveLearner),
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/getAllUsers")
-    public List<UserDTO> getAllUsers(){
-        return userService.getAllUsers();
+    @PreAuthorize("hasRole('Admin')")
+    public ResponseEntity<StandardResponse> getAllUsers(){
+
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",userService.getAllUsers()),
+                HttpStatus.OK
+        );
+    }
+
+    @GetMapping(path = {"/getAllActiveUsers"},
+            params = {"page","size"}
+    )
+    @PreAuthorize("hasRole('Admin')")
+    public ResponseEntity<StandardResponse> getAllActiveUsers(
+            @RequestParam(value = "page")int page,
+            @RequestParam(value = "size")int size)
+    {
+        PaginatedResponseDTO paginatedResponseDTO = userService.getAllActiveUsers(page,size);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",paginatedResponseDTO),
+                HttpStatus.OK
+        );
     }
 
     @GetMapping(
             path = "/getUser",
             params = "id"
     )
-    public UserDTO getUser(@RequestParam(value = "id")int learnerID){
-        return userService.getUserById(learnerID);
+    @PreAuthorize("hasAnyRole('Admin','Teacher','Learner')")
+    public ResponseEntity<StandardResponse> getUser(@RequestParam(value = "id")int userID){
+
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",userService.getUserById(userID)),
+                HttpStatus.OK
+        );
     }
 
+    @DeleteMapping(path = "/deleteUser/{id}")
+    @PreAuthorize("hasRole('Admin')")
+    public ResponseEntity<StandardResponse> deleteUser(@PathVariable(value = "id")int userID){
 
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",userService.deleteUser(userID)),
+                HttpStatus.OK
+        );
+    }
+
+    @PutMapping("/updateUser")
+    @PreAuthorize("hasAnyRole('Admin','Teacher','Learner')")
+    public ResponseEntity<StandardResponse> updateUser(@RequestBody UserUpdateDTO userUpdateDTO){
+
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",userService.updateUser(userUpdateDTO)),
+                HttpStatus.OK
+        );
+    }
 }

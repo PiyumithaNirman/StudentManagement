@@ -20,8 +20,11 @@ public class UserDTO {
     private String lastName;
     private String password;
     private String userName;
-    private ArrayList phoneNumber;
+    private String phoneNumber;
+
+    private int age;
     private boolean activeState;
+
     private RoleTypes roleTypes;
 
     private Set<Address> addresses;
@@ -29,7 +32,7 @@ public class UserDTO {
     Set<Enrollment> enrollments;
     Set<Role> roles;
 
-    public UserDTO(String firstName, String lastName, String userName, ArrayList phoneNumber, boolean activeState, Set<Address> addresses, Set<Course> courses, Set<Enrollment> enrollments, Set<Role> roles) {
+    public UserDTO(String firstName, String lastName, String userName, String phoneNumber, boolean activeState, Set<Address> addresses, Set<Course> courses, Set<Enrollment> enrollments, Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;

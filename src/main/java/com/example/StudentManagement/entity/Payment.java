@@ -30,4 +30,8 @@ public class Payment {
 
     @Column(name = "paid_date",length = 100,nullable = false)
     private Date paymentDate;
+
+    @OneToOne
+    @JoinColumn(name = "enrollment_id")
+    private Enrollment enrollment;
 }

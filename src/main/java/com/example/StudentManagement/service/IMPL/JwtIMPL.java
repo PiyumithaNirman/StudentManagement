@@ -47,7 +47,7 @@ public class JwtIMPL implements UserDetailsService, JwtService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        System.out.println(userName+"INNNNNNN");
+        System.out.println(userName);
         User user = userRepo.findByUserName(userName);
 
         if (user != null) {

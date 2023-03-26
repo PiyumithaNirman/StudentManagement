@@ -1,15 +1,21 @@
 package com.example.StudentManagement.service;
 
+import com.example.StudentManagement.dto.Paginated.PaginatedResponseDTO;
+import com.example.StudentManagement.dto.Request.UserUpdateDTO;
+import com.example.StudentManagement.dto.Response.UserGetDTO;
 import com.example.StudentManagement.dto.UserDTO;
 
 import java.util.List;
 
 public interface UserService {
     String saveLearner(UserDTO userDTO);
-    List<UserDTO>getAllUsers();
+    List<UserGetDTO>getAllUsers();
 
-    UserDTO getUserById(int learnerID);
+    UserGetDTO getUserById(int userID);
 
-//    void saveAdmin();
+    String deleteUser(int userID);
 
+    String updateUser(UserUpdateDTO userUpdateDTO);
+
+    PaginatedResponseDTO getAllActiveUsers(int page, int size);
 }

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @EnableJpaRepositories
-public interface RoleRepo extends JpaRepository<Role, String> {
+public interface RoleRepo extends JpaRepository<Role, Integer> {
     Role getAllByRoleName(String roleName);
 
-//    Role getAllByRoleID(int i);
+    boolean existsByRoleId(int roleId);
 }

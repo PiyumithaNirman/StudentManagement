@@ -40,6 +40,7 @@ public class Enrollment {
     @JoinColumn(name = "course_id")
     private Course course;
 
-
+    @OneToOne(mappedBy="enrollment")
+    private Payment payment;
 
 }
