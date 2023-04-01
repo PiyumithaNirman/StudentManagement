@@ -5,7 +5,6 @@ import com.example.StudentManagement.dto.Request.UserUpdateDTO;
 import com.example.StudentManagement.dto.UserDTO;
 import com.example.StudentManagement.service.UserService;
 import com.example.StudentManagement.util.StandardResponse;
-import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -39,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/getAllUsers")
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<StandardResponse> getAllUsers(){
 
         return new ResponseEntity<StandardResponse>(
@@ -51,7 +49,7 @@ public class UserController {
     @GetMapping(path = {"/getAllActiveUsers"},
             params = {"page","size"}
     )
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<StandardResponse> getAllActiveUsers(
             @RequestParam(value = "page")int page,
             @RequestParam(value = "size")int size)
@@ -67,7 +65,7 @@ public class UserController {
             path = "/getUser",
             params = "id"
     )
-    @PreAuthorize("hasAnyRole('Admin','Teacher','Learner')")
+    @PreAuthorize("hasAnyRole('ADMIN','TEACHER','LEARNER')")
     public ResponseEntity<StandardResponse> getUser(@RequestParam(value = "id")int userID){
 
         return new ResponseEntity<StandardResponse>(
@@ -77,7 +75,7 @@ public class UserController {
     }
 
     @DeleteMapping(path = "/deleteUser/{id}")
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<StandardResponse> deleteUser(@PathVariable(value = "id")int userID){
 
         return new ResponseEntity<StandardResponse>(
@@ -87,7 +85,7 @@ public class UserController {
     }
 
     @PutMapping("/updateUser")
-    @PreAuthorize("hasAnyRole('Admin','Teacher','Learner')")
+    @PreAuthorize("hasAnyRole('ADMIN','TEACHER','LEARNER')")
     public ResponseEntity<StandardResponse> updateUser(@RequestBody UserUpdateDTO userUpdateDTO){
 
         return new ResponseEntity<StandardResponse>(

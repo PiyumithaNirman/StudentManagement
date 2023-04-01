@@ -60,20 +60,20 @@ public class User {
     private String phoneNumber;
 
     @Column(name = "user_age", nullable = false)
-//    @Min(18)
-//    @Max(80)
+    @Min(18)
+    @Max(80)
     @NotNull
     private int age;
 
     @Column(name = "active_state", columnDefinition = "TINYINT default 1")
     private boolean activeState;
 
-    @OneToMany(mappedBy="user")
-    private Set<Address> addresses;
+//    @OneToMany(mappedBy="user")
+//    private Set<Address> addresses;
 
-    @OneToMany(mappedBy="user")
-    private Set<Course> courses;
-
+//    @OneToMany(mappedBy="user")
+//    private Set<Course> courses;
+//
     @OneToMany(mappedBy = "user")
     Set<Enrollment> enrollments;
 
@@ -89,9 +89,6 @@ public class User {
                )
     private Set<Role> role;
 
-//    @OneToMany(mappedBy = "user")
-//    Set<UserRole> userRoles;
-
     public User(String firstName, String lastName, String password, String userName, String phoneNumber, int age, boolean activeState) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -102,16 +99,4 @@ public class User {
         this.activeState = activeState;
     }
 
-    public User(String firstName, String lastName, String userName, String phoneNumber, int age, boolean activeState, Set<Address> addresses, Set<Course> courses, Set<Enrollment> enrollments, Set<Role> role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.phoneNumber = phoneNumber;
-        this.age = age;
-        this.activeState = activeState;
-        this.addresses = addresses;
-        this.courses = courses;
-        this.enrollments = enrollments;
-        this.role = role;
-    }
 }

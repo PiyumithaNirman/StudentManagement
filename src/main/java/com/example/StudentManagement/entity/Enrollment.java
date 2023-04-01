@@ -43,4 +43,10 @@ public class Enrollment {
     @OneToOne(mappedBy="enrollment")
     private Payment payment;
 
+    public Enrollment(Date date, boolean active_state, User user, Course course) {
+        this.date = date;
+        this.active_state = active_state;
+        this.user = user;
+        this.course = course;
+    }
 }

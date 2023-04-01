@@ -40,10 +40,11 @@ public class Address {
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    public Address(String street, String city, String state, int zipCode) {
+    public Address(String street, String city, String state, int zipCode, User user) {
         this.street = street;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
+        this.user = user;
     }
 }

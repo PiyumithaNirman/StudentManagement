@@ -25,23 +25,15 @@ public class UserDTO {
     private int age;
     private boolean activeState;
 
-    private RoleTypes roleTypes;
+    private String roleName;
 
-    private Set<Address> addresses;
-    private Set<Course> courses;
-    Set<Enrollment> enrollments;
-    Set<Role> roles;
+    private String description;
 
-    public UserDTO(String firstName, String lastName, String userName, String phoneNumber, boolean activeState, Set<Address> addresses, Set<Course> courses, Set<Enrollment> enrollments, Set<Role> roles) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.phoneNumber = phoneNumber;
-        this.activeState = activeState;
-        this.addresses = addresses;
-        this.courses = courses;
-        this.enrollments = enrollments;
-        this.roles = roles;
-    }
+//    private RoleTypes roleTypes;
+
+//    private Set<Address> addresses;
+//    private Set<Course> courses;
+//    Set<Enrollment> enrollments;
+//    Set<Role> roles;
 
 }

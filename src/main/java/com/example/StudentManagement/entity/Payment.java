@@ -34,4 +34,10 @@ public class Payment {
     @OneToOne
     @JoinColumn(name = "enrollment_id")
     private Enrollment enrollment;
+
+    public Payment(int amount, Date paymentDate, Enrollment enrollment) {
+        this.amount = amount;
+        this.paymentDate = paymentDate;
+        this.enrollment = enrollment;
+    }
 }

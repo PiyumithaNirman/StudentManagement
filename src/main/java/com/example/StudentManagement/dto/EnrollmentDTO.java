@@ -1,18 +1,20 @@
 package com.example.StudentManagement.dto;
 
-import com.example.StudentManagement.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AddressDTO {
+public class EnrollmentDTO {
 
+    private Date Date;
+    private boolean active_state;
+    private Date endDate;
     private int userId;
-    private String street;
-    private String city;
-    private String state;
-    private int zipCode;
+    private int courseId;
+    private int amount;
 }

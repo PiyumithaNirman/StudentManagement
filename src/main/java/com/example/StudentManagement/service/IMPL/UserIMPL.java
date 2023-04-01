@@ -18,8 +18,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Valid;
 import java.util.*;
 
 @Service
@@ -46,9 +46,14 @@ public class UserIMPL implements UserService {
     }
 
     @Override
-    public String saveLearner(@Valid UserDTO userDTO) {
+    @Transactional
+    public String saveLearner(UserDTO userDTO) {
 
-        Role role = roleRepo.getAllByRoleName(String.valueOf(userDTO.getRoleTypes()));
+        Role role = new Role(
+                userDTO.getRoleName(),
+                userDTO.getDescription()
+        );
+
         Set<Role> roles = new HashSet<>();
         roles.add(role);
 
@@ -91,9 +96,7 @@ public class UserIMPL implements UserService {
                     user.getPhoneNumber(),
                     user.getAge(),
                     user.isActiveState(),
-                    user.getAddresses(),
-                    user.getCourses(),
-                    user.getEnrollments(),
+//                    user.getAddresses(),
                     user.getRole()
             );
 
@@ -109,7 +112,7 @@ public class UserIMPL implements UserService {
 
         Page<User> usersPage = userRepo.findAllByActiveState(activeUser, PageRequest.of(page,size));
         if(usersPage.getSize()<1){
-            throw new NotFoundException("No Data Found");
+            throw new NotFoundException("No User Found");
         }
         return new PaginatedResponseDTO(modelMapper.map(usersPage, new TypeToken<List<UserDTO>>() {}.getType()),
                 userRepo.countAllByActiveStateEquals(activeUser));
@@ -128,22 +131,15 @@ public class UserIMPL implements UserService {
                     user.getPhoneNumber(),
                     user.getAge(),
                     user.isActiveState(),
-                    user.getAddresses(),
-                    user.getCourses(),
-                    user.getEnrollments(),
+//                    user.getAddresses(),
                     user.getRole()
             );
             return userGetDTO;
+
         }else {
-            System.out.println("User Id is not found");
-            return null;
+            throw new NotFoundException("User Id is not found");
         }
     }
-
-//    public void addTrigger() {
-//        String query = "CREATE TRIGGER save_roles_on_user_delete ...";
-//        jdbcTemplate.execute(query);
-//    }
 
     @Override
     public String deleteUser(int userID) {
@@ -151,10 +147,9 @@ public class UserIMPL implements UserService {
         if(userRepo.existsById(userID)){
 
             userRepo.deleteById(userID);
-//            addTrigger();
             return "User has been deleted";
         }else
-            return "User is not found. cant be deleted";
+            throw new NotFoundException("User is not found. cant be deleted");
     }
 
     @Override
@@ -170,14 +165,12 @@ public class UserIMPL implements UserService {
             user.setPhoneNumber(userUpdateDTO.getPhoneNumber());
 
             userRepo.save(user);
-            System.out.println("User has been updated");
+            return "User has been updated";
+
         }else{
-            return "User Id is not found";
+
+            throw new NotFoundException("User is not found");
         }
 
-        return null;
     }
-
-
-
 }

@@ -38,17 +38,9 @@ public class PostConstructController {
 
             Role role = new Role();
             role.setRoleId(1);
-            role.setRoleName("Admin");
-            role.setDescription("Admin");
+            role.setRoleName("ADMIN");
+            role.setDescription("ADMIN");
 
-        if (!roleRepo.existsById(role.getRoleId())) {
-
-            roleRepo.save(role);
-            System.out.println("Successfully create new role");
-
-        }else {
-            System.out.println("Role has already been added");
-        }
 
             User user = new User();
             user.setUserId(1);
