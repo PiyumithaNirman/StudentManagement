@@ -68,8 +68,8 @@ public class User {
     @Column(name = "active_state", columnDefinition = "TINYINT default 1")
     private boolean activeState;
 
-//    @OneToMany(mappedBy="user")
-//    private Set<Address> addresses;
+    @OneToMany(mappedBy="user")
+    private Set<Address> addresses;
 
 //    @OneToMany(mappedBy="user")
 //    private Set<Course> courses;

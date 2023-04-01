@@ -93,4 +93,15 @@ public class UserController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping(
+            path = "/getQuarry",
+            params = "city"
+    )
+    public ResponseEntity<StandardResponse> getUserQuary(@RequestParam("city")String city){
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",userService.getUserQuarry(city)),
+                HttpStatus.OK
+        );
+    }
 }

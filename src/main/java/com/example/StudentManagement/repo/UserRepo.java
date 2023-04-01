@@ -21,6 +21,10 @@ public interface UserRepo extends JpaRepository<User, Integer> {
 
     Page<User> findAllByActiveState(boolean activeUser, Pageable pageable);
 
-
     long countAllByActiveStateEquals(boolean activeUser);
+
+
+    @Query(value ="select u.user_name from user u, address a where u.active_state = ?1 and a.city = ?2 and u.user_id=a.user_id" ,nativeQuery = true)
+    String findAllByActiveStateAndCity(boolean activeUser, String city);
+
 }

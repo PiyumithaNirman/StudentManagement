@@ -18,4 +18,6 @@ public interface UserService {
     String updateUser(UserUpdateDTO userUpdateDTO);
 
     PaginatedResponseDTO getAllActiveUsers(int page, int size);
+
+    String getUserQuarry(String city);
 }

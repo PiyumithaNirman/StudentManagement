@@ -173,4 +173,11 @@ public class UserIMPL implements UserService {
         }
 
     }
+
+    @Override
+    public String getUserQuarry(String city) {
+         boolean activeUser = true;
+
+        return userRepo.findAllByActiveStateAndCity(activeUser,city);
+    }
 }
