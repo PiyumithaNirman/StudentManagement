@@ -68,14 +68,14 @@ public class User {
     @Column(name = "active_state", columnDefinition = "TINYINT default 1")
     private boolean activeState;
 
-    @OneToMany(mappedBy="user")
-    private Set<Address> addresses;
+//    @OneToMany(mappedBy="user")
+//    private Set<Address> addresses;
 
 //    @OneToMany(mappedBy="user")
 //    private Set<Course> courses;
 //
-    @OneToMany(mappedBy = "user")
-    Set<Enrollment> enrollments;
+//    @OneToMany(mappedBy = "user")
+//    Set<Enrollment> enrollments;
 
    // @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
