@@ -20,4 +20,6 @@ public interface UserService {
     PaginatedResponseDTO getAllActiveUsers(int page, int size);
 
     String getUserQuarry(String city);
+
+    int UserCountActiveAndAge(int age);
 }

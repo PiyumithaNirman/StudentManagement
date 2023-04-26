@@ -105,4 +105,12 @@ public class UserController {
                 HttpStatus.OK
         );
     }
+
+    @GetMapping(
+            path = "userCountActiveUserAndAge",
+            params = "age")
+    @PreAuthorize("hasAnyRole('ADMIN','TEACHER','LEARNER')")
+    public int getCountActiveUserAndAge(@RequestParam("age")int age){
+        return userService.UserCountActiveAndAge(age);
+    }
 }

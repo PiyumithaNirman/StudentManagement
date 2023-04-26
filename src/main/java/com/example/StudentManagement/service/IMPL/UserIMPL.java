@@ -180,4 +180,12 @@ public class UserIMPL implements UserService {
 
         return userRepo.findAllByActiveStateAndCity(activeUser,city);
     }
+
+    @Override
+    public int UserCountActiveAndAge(int age) {
+
+        boolean activeUser = true;
+
+        return userRepo.countAllByActiveStateAndAgeGreaterThanEqual(activeUser,age);
+    }
 }
